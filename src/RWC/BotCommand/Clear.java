@@ -2,6 +2,10 @@ package RWC.BotCommand;
 
 import java.util.List;
 
+/**
+* Some changes
+*/
+
 import RWC.Bot.Bot;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
