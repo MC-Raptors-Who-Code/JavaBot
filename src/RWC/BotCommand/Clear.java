@@ -6,38 +6,37 @@ import java.util.List;
 * Some changes
 */
 
-import RWC.Bot.Bot;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 /**
  * Clear class for the clear command
  * @author steum
  *
  */
-public class Clear extends ListenerAdapter{
+public class Clear extends AbstractCommand{
 	/**
 	 * Method to run event of clear command
 	 */
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		
 		//command entered by user
-		String[] args=event.getMessage().getContentRaw().split("\\s+");
+		String[] args = event.getMessage().getContentRaw().split("\\s+");
+		
 		//checking command syntax
-		if(args[0].equalsIgnoreCase(Bot.prefix+"clear")) {
+		if(args[0].equalsIgnoreCase(PREFIX + getName())) {
 			//Embed to print messages
-			EmbedBuilder clear=new EmbedBuilder();
+			EmbedBuilder clear = new EmbedBuilder();
 			
 			//check if command has the right number of arguments
-			if(args.length<2) {
+			if(args.length < 2) {
 				
 				clear.setTitle("⚠Syntax Error");
 				clear.setDescription("Please tell me how many messages I should delete");
-				clear.addField("Example","$clear 50",false);
+				clear.addField("Example", PREFIX + "" + "clear 50",false);
 				clear.setColor(0xeb3434);
-				//Meet.setFooter("Here you go!",event.getMember().getUser().getAvatarUrl());
+				
 				event.getChannel().sendMessage(clear.build()).queue();
 				clear.clear();
 			}
@@ -45,15 +44,26 @@ public class Clear extends ListenerAdapter{
 				
 				// try & catch blocks because discord doesn't allow to delete more than 100 messages or messages older than 2 weeks
 				try {
+				
 				// retrieve message of the channel where command was written	
-				List<Message>messages=event.getChannel().getHistory().retrievePast(Integer.parseInt(args[1])).complete();
-				event.getChannel().deleteMessages(messages).queue();
+				List<Message> messages = event.getChannel().getHistory().retrievePast(Integer.parseInt(args[1]) + 1).complete();
+				/*
+				 * Deletes messages depending on amount.
+				 * If the amount of messages to be deleted are between 2-100, call deleteMessages(Collection<Message> messages)
+				 * else, call Message.delete(), since the former cannot delete a single message.
+				 */
+				if (messages.size() == 2) {
+					messages.get(1).delete().queue();
+				} else {
+					event.getChannel().deleteMessages(messages.subList(1, messages.size())).queue();
+				}
 				
 				//success in deletion
 				clear.setTitle("✅SUCCESS");
 				clear.setDescription("Successfully deleted. Hooray!🎉");
 				clear.setColor(0x34eb6e);
-				//Meet.setFooter("Here you go!",event.getMember().getUser().getAvatarUrl());
+				
+				clear.setFooter("Here you go!",event.getMember().getUser().getAvatarUrl());
 				event.getChannel().sendMessage(clear.build()).queue();
 				clear.clear();
 				
@@ -61,7 +71,7 @@ public class Clear extends ListenerAdapter{
 				catch(IllegalArgumentException e) {
 					//Embeds to print messages in case of error (more than 100 messages or > 2 weeks old)
 					if(e.toString().startsWith("java.lang.IllegalArgumentException: Message retrieval")) {
-						EmbedBuilder error=new EmbedBuilder();
+						EmbedBuilder error = new EmbedBuilder();
 						error.setTitle("🛑Too many messages");
 						error.setDescription("I can't delete more than 100 messages. Sorry!😁");
 						error.setColor(0xeb3434);
@@ -69,7 +79,7 @@ public class Clear extends ListenerAdapter{
 						error.clear();
 					}
 					else {
-						EmbedBuilder error=new EmbedBuilder();
+						EmbedBuilder error = new EmbedBuilder();
 						error.setTitle("❌Old messages");
 						error.setDescription("Either you just asked me to delete a 2 weeks or older message or there are no messages left for me to delete. Hmm?🤔");
 						error.setColor(0xeb3434);
@@ -78,9 +88,29 @@ public class Clear extends ListenerAdapter{
 					}
 				}
 			}
-			
-			
 		}
+	}
+
+	@Override
+	public String getName() {
+		return "Clear";
+	}
+	
+	@Override
+	public String getArgs() {
+		return "[amount]";
+	}
+
+	@Override
+	public String getDescription() {
+		return "Deletes previous messages";
+	}
+	
+	@Override
+	public String getExample() {
+		return "Argument " + getArgs() + " The amount of messages to be deleted. Must be between 1-100 inclusive."
+				+ "\nThis command deletes a specified amount of previous messages, but cannot delete ones older than 2 weeks"
+				+ "\n\nExample:\n" + PREFIX + "" + getName() + " 5 will delete 5 messages";
 	}
 
 }

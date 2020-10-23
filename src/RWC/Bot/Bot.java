@@ -3,6 +3,7 @@ package RWC.Bot;
 import javax.security.auth.login.LoginException;
 
 import RWC.BotCommand.Clear;
+import RWC.BotCommand.Help;
 import RWC.BotCommand.Meet;
 import RWC.BotEvent.GuildMemberJoin;
 import RWC.BotEvent.GuildMemberLeave;
@@ -12,18 +13,21 @@ import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 
 public class Bot {
+	
 	public static JDA jda;
-	public static String prefix="!";
 	
 	//Main method
-	public static void main(String[]args)throws LoginException{
-		jda = JDABuilder.createDefault("JjRyVrhoCkulsq5KKezxyvj5j4ni5ds3").build();
-		jda.getPresence().setStatus(OnlineStatus.IDLE);
+	public static void main(String[]args)throws LoginException {
+
+		jda = JDABuilder.createDefault(Config.TOKEN).build();
+		jda.getPresence().setStatus(OnlineStatus.ONLINE);
 		jda.getPresence().setActivity(Activity.watching("One Punch Man"));
 		
+		jda.addEventListener(new Help());
 		jda.addEventListener(new Meet());
 		jda.addEventListener(new Clear());
 		jda.addEventListener(new GuildMemberJoin());
 		jda.addEventListener(new GuildMemberLeave());
 	}
+
 }
