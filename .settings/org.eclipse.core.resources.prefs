@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+encoding//src/RWC/BotCommand/ChangePrefix.java=UTF-8
+encoding//src/RWC/BotCommand/Clear.java=UTF-8
+encoding//src/RWC/BotCommand/Help.java=UTF-8
+encoding//src/RWC/BotCommand/Meet.java=UTF-8
+encoding//src/RWC/BotEvent/GuildMemberLeave.java=UTF-8

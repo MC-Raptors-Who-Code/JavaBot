@@ -2,6 +2,7 @@ package RWC.Bot;
 
 import javax.security.auth.login.LoginException;
 
+import RWC.BotCommand.ChangePrefix;
 import RWC.BotCommand.Clear;
 import RWC.BotCommand.Help;
 import RWC.BotCommand.Meet;
@@ -26,6 +27,7 @@ public class Bot {
 		jda.addEventListener(new Help());
 		jda.addEventListener(new Meet());
 		jda.addEventListener(new Clear());
+		jda.addEventListener(new ChangePrefix());
 		jda.addEventListener(new GuildMemberJoin());
 		jda.addEventListener(new GuildMemberLeave());
 	}

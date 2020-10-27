@@ -1,5 +1,6 @@
 package RWC.BotCommand;
 
+import RWC.Bot.Config;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
@@ -9,7 +10,7 @@ public class Meet extends AbstractCommand{
 		
 		String[] args=event.getMessage().getContentRaw().split("\\s+");
 		
-		if(args[0].equalsIgnoreCase(PREFIX + getName())) {
+		if(args[0].equalsIgnoreCase(Config.prefix + getName())) {
 			EmbedBuilder meet=new EmbedBuilder();
 			meet.setTitle("📅 Meeting Schedule");
 			meet.setDescription("Weekly meeting schedule");
@@ -36,7 +37,7 @@ public class Meet extends AbstractCommand{
 
 	@Override
 	public String getExample() {
-		return getDescription() + "\nExample: " + PREFIX + "" + getName();
+		return getDescription() + "\nExample: " + Config.prefix + "" + getName();
 	}
 
 }

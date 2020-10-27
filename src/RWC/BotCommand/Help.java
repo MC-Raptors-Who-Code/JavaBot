@@ -1,5 +1,6 @@
 package RWC.BotCommand;
 
+import RWC.Bot.Config;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
@@ -13,18 +14,18 @@ public class Help extends AbstractCommand{
 	
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		
-		AbstractCommand[] commands = {new Help(), new Meet(), new Clear()};
+		AbstractCommand[] commands = {new Help(), new Meet(), new Clear(), new ChangePrefix()};
 		EmbedBuilder help = new EmbedBuilder();
-		String[] args=event.getMessage().getContentRaw().split("\\s+");
+		String[] args = event.getMessage().getContentRaw().split("\\s+");
 		
-		if(args.length == 1 && args[0].equalsIgnoreCase(PREFIX + getName())) {
+		if(args.length == 1 && args[0].equalsIgnoreCase(Config.prefix + getName())) {
 
 			StringBuilder message = new StringBuilder("```\n");
 			
 			//Builds message
 			for (AbstractCommand command: commands) {
-				message.append(PREFIX + "" + command.getName() + " " + command.getArgs() 
-				+ String.format("%" + (command.getDescription().length() + 20 - command.getName().length() - command.getArgs().length()) 
+				message.append(Config.prefix + "" + command.getName() + " " + command.getArgs() 
+				+ String.format("%" + (command.getDescription().length() + 25 - command.getName().length() - command.getArgs().length()) 
 				+ "s", command.getDescription()) + "\n");
 			}
 			message.append("\n```");
@@ -33,18 +34,18 @@ public class Help extends AbstractCommand{
 			help.setTitle("Commands");
 			help.addField("General:", message.toString(),true);
 			help.setColor(0x592e8e);
-			help.setFooter("Here you go! For further information on a command type " + PREFIX 
+			help.setFooter("Here you go! For further information on a command type " + Config.prefix 
 					+ "" + getName() + " [command]" ,event.getMember().getUser().getAvatarUrl());
 			event.getChannel().sendMessage(help.build()).queue();
 			
-		} else if (args.length > 1 && args[0].equalsIgnoreCase(PREFIX + getName())) {
+		} else if (args.length > 1 && args[0].equalsIgnoreCase(Config.prefix + getName())) {
 			
 			try {
 				
 				AbstractCommand command = findCommand(commands, args[1]);
 				
 				//Builds embed
-				help.setTitle("Help " + "" + PREFIX + "" + command.getName());
+				help.setTitle("Help " + "" + Config.prefix + "" + command.getName());
 				help.setDescription(command.getExample());
 				help.setColor(0x592e8e);
 				help.setFooter("Here you go!",event.getMember().getUser().getAvatarUrl());
@@ -77,13 +78,14 @@ public class Help extends AbstractCommand{
 	@Override
 	public String getExample() {
 		return "Two uses:\n"
-		+ PREFIX + "" + getName() + " Displays all commands.\n"
-		+ PREFIX + "" + getName() + " [command] provides further information on a command\n"
-		+ "\nExample:\n" + PREFIX + "" + getName() + " clear will display futher information on clear";
+		+ Config.prefix + "" + getName() + " Displays all commands.\n"
+		+ Config.prefix + "" + getName() + " [command] provides further information on a command\n"
+		+ "\nExample:\n" + Config.prefix + "" + getName() + " clear will display futher information on clear";
 	}
 	
 	/**
-	 * Finds the corresponding command based on the string passed
+	 * Searches for the corresponding command based on the string passed
+	 * NOTE: The search algorithm must be changed in the future when more commands are added.
 	 * 
 	 * @param commands	Array containing all commands
 	 * @param name	Name of the command

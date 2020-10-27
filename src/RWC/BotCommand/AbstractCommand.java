@@ -1,6 +1,5 @@
 package RWC.BotCommand;
 
-import RWC.Bot.Config;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -10,9 +9,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
  * @author Rose Griffin
  *
  */
-abstract class AbstractCommand extends ListenerAdapter {
-	
-	public String PREFIX = Config.PREFIX;
+public abstract class AbstractCommand extends ListenerAdapter {
 	
 	public abstract void onGuildMessageReceived(GuildMessageReceivedEvent event);
 	
@@ -24,7 +21,8 @@ abstract class AbstractCommand extends ListenerAdapter {
 	
 	/**
 	 * Returns the arguments of a command
-	 * If the command does not have arguments, return an empty string
+	 * If the command does not have arguments, return an empty string. Only override this if the
+	 * command contains arguments
 	 */
 	public String getArgs() {
 		return "";

@@ -2,16 +2,21 @@ package RWC.BotCommand;
 
 import java.util.List;
 
+import RWC.Bot.Config;
+
 /**
 * Some changes
 */
 
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.internal.utils.PermissionUtil;
 
 /**
  * Clear class for the clear command
+ * Can only be used by a user with the MESSAGE_MANAGE permission 
  * @author steum
  *
  */
@@ -25,7 +30,7 @@ public class Clear extends AbstractCommand{
 		String[] args = event.getMessage().getContentRaw().split("\\s+");
 		
 		//checking command syntax
-		if(args[0].equalsIgnoreCase(PREFIX + getName())) {
+		if(args[0].equalsIgnoreCase(Config.prefix + getName())) {
 			//Embed to print messages
 			EmbedBuilder clear = new EmbedBuilder();
 			
@@ -34,17 +39,19 @@ public class Clear extends AbstractCommand{
 				
 				clear.setTitle("⚠Syntax Error");
 				clear.setDescription("Please tell me how many messages I should delete");
-				clear.addField("Example", PREFIX + "" + "clear 50",false);
+				clear.addField("Example", Config.prefix + "" + "clear 50",false);
 				clear.setColor(0xeb3434);
 				
 				event.getChannel().sendMessage(clear.build()).queue();
 				clear.clear();
+			} else if (!PermissionUtil.checkPermission(event.getChannel(),event.getMember(), Permission.MESSAGE_MANAGE)) {
+				event.getChannel().sendMessage("You do not have permission to use this command").queue();
 			}
 			else {
 				
 				// try & catch blocks because discord doesn't allow to delete more than 100 messages or messages older than 2 weeks
 				try {
-				
+					
 				// retrieve message of the channel where command was written	
 				List<Message> messages = event.getChannel().getHistory().retrievePast(Integer.parseInt(args[1]) + 1).complete();
 				/*
@@ -108,9 +115,9 @@ public class Clear extends AbstractCommand{
 	
 	@Override
 	public String getExample() {
-		return "Argument " + getArgs() + " The amount of messages to be deleted. Must be between 1-100 inclusive."
+		return "Argument " + getArgs() + ": The amount of messages to be deleted. Must be between 1-100 inclusive."
 				+ "\nThis command deletes a specified amount of previous messages, but cannot delete ones older than 2 weeks"
-				+ "\n\nExample:\n" + PREFIX + "" + getName() + " 5 will delete 5 messages";
+				+ "\n\nExample:\n" + Config.prefix + "" + getName() + " 5 will delete 5 messages";
 	}
 
 }

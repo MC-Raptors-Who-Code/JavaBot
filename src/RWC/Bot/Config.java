@@ -10,5 +10,10 @@ public class Config {
 	public static String TOKEN = "Put your token here";
 	
 	//Bot prefix
-	public static String PREFIX = "!";
+	public static String prefix = "!";
+	
+	public static void setPrefix(String newPrefix) {
+		prefix = newPrefix;
+	}
+	
 }
