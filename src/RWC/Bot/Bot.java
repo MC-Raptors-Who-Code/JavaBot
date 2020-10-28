@@ -18,10 +18,10 @@ public class Bot {
 	public static JDA jda;
 	
 	//Main method
-	public static void main(String[]args)throws LoginException {
 
-		jda = JDABuilder.createDefault(Config.TOKEN).build();
-		jda.getPresence().setStatus(OnlineStatus.ONLINE);
+	public static void main(String[]args)throws LoginException{
+		jda = JDABuilder.createDefault("TOKEN").build();
+		jda.getPresence().setStatus(OnlineStatus.IDLE);
 		jda.getPresence().setActivity(Activity.watching("One Punch Man"));
 		
 		jda.addEventListener(new Help());
