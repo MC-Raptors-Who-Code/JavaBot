@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 //Hey my name is Franco. I am making some modifications to the code.
 
-public class Meet extends ListenerAdapter{
+public class Meet extends AbstractCommand {
 	
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		

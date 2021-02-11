@@ -20,7 +20,7 @@ public class Bot {
 	//Main method
 
 	public static void main(String[]args)throws LoginException{
-		jda = JDABuilder.createDefault("TOKEN").build();
+		jda = JDABuilder.createDefault(Config.TOKEN).build();
 		jda.getPresence().setStatus(OnlineStatus.IDLE);
 		jda.getPresence().setActivity(Activity.watching("One Punch Man"));
 		
