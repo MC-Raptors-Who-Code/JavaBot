@@ -16,7 +16,7 @@ public class Meet extends AbstractCommand {
 			EmbedBuilder meet=new EmbedBuilder();
 			meet.setTitle("📅 Meeting Schedule");
 			meet.setDescription("Weekly meeting schedule");
-			meet.addField("TUESDAY & THURSDAY","5-6 PM",false);
+			meet.addField("THURSDAY","5-6 PM",false);
 			meet.setColor(0x3452eb);
 			meet.setFooter("Here you go!",event.getMember().getUser().getAvatarUrl());
 			
@@ -41,5 +41,4 @@ public class Meet extends AbstractCommand {
 	public String getExample() {
 		return getDescription() + "\nExample: " + Config.prefix + "" + getName();
 	}
-
 }
