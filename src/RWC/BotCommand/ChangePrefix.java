@@ -31,7 +31,7 @@ public class ChangePrefix extends AbstractCommand{
 				EmbedBuilder change = new EmbedBuilder();
 				
 				change.setTitle("⚠Syntax Error");
-				change.setDescription("Please tell me what to change the prefix too");
+				change.setDescription("Please tell me what to change the prefix to");
 				change.addField("Example", Config.prefix + "" + "changePrefix r!",false);
 				change.setColor(0xeb3434);
 				
