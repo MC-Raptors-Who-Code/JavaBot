@@ -104,6 +104,11 @@ public class Clear extends AbstractCommand{
 	}
 	
 	@Override
+	public int getCategory() {
+		return 0;
+	}
+	
+	@Override
 	public String getArgs() {
 		return "[amount]";
 	}
@@ -119,5 +124,4 @@ public class Clear extends AbstractCommand{
 				+ "\nThis command deletes a specified amount of previous messages, but cannot delete ones older than 2 weeks"
 				+ "\n\nExample:\n" + Config.prefix + "" + getName() + " 5 will delete 5 messages";
 	}
-
 }

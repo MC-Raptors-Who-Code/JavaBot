@@ -31,7 +31,12 @@ public class Meet extends AbstractCommand {
 	public String getName() {
 		return "Meet";
 	}
-
+	
+	@Override
+	public int getCategory() {
+		return 1;
+	}
+	
 	@Override
 	public String getDescription() {
 		return "Displays club meeting times";
@@ -41,4 +46,7 @@ public class Meet extends AbstractCommand {
 	public String getExample() {
 		return getDescription() + "\nExample: " + Config.prefix + "" + getName();
 	}
+
+
+
 }

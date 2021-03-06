@@ -10,7 +10,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
  * @author Rose Griffin
  *
  */
-public class Help extends AbstractCommand{
+public class Help extends AbstractCommand {
 	
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		
@@ -32,7 +32,7 @@ public class Help extends AbstractCommand{
 			
 			//Builds embed
 			help.setTitle("Commands");
-			help.addField("General:", message.toString(),true);
+			help.addField("General:", message.toString(),false);
 			help.setColor(0x592e8e);
 			help.setFooter("Here you go! For further information on a command type " + Config.prefix 
 					+ "" + getName() + " [command]" ,event.getMember().getUser().getAvatarUrl());
@@ -71,6 +71,11 @@ public class Help extends AbstractCommand{
 	}
 	
 	@Override
+	public int getCategory() {
+		return 0;
+	}
+	
+	@Override
 	public String getDescription() {
 		return "Displays all commands";
 	}
@@ -101,5 +106,4 @@ public class Help extends AbstractCommand{
 		//Throw an exception if the argument passed is not a valid command
 		throw new IllegalArgumentException();
 	}
-
 }

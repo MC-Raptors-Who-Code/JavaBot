@@ -47,6 +47,11 @@ public class ChangePrefix extends AbstractCommand{
 	}
 	
 	@Override
+	public int getCategory() {
+		return 0;
+	}
+	
+	@Override
 	public String getArgs() {
 		return "[prefix]";
 	}
@@ -62,5 +67,9 @@ public class ChangePrefix extends AbstractCommand{
 				+ "\nThis command changes the bot prefix"
 				+ "\n\nExample:\n" + Config.prefix + "" + getName() + " r! will change the prefix to r!";
 	}
+
+
+
+
 
 }

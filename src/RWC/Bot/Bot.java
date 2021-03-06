@@ -6,6 +6,7 @@ import RWC.BotCommand.ChangePrefix;
 import RWC.BotCommand.Clear;
 import RWC.BotCommand.Help;
 import RWC.BotCommand.Meet;
+import RWC.BotEvent.AddRole;
 import RWC.BotEvent.GuildMemberJoin;
 import RWC.BotEvent.GuildMemberLeave;
 import net.dv8tion.jda.api.JDA;
@@ -30,6 +31,7 @@ public class Bot {
 		jda.addEventListener(new ChangePrefix());
 		jda.addEventListener(new GuildMemberJoin());
 		jda.addEventListener(new GuildMemberLeave());
+		jda.addEventListener(new AddRole());
 	}
 
 }

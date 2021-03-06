@@ -20,6 +20,13 @@ public abstract class AbstractCommand extends ListenerAdapter {
 	public abstract String getName();
 	
 	/**
+	 * Returns the category of the command as an int
+	 * Admin = 0
+	 * General = 1
+	 */
+	public abstract int getCategory();
+	
+	/**
 	 * Returns the arguments of a command
 	 * If the command does not have arguments, return an empty string. Only override this if the
 	 * command contains arguments
