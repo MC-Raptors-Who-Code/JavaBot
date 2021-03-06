@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
  * @author Rose Griffin
  *
  */
-public abstract class AbstractCommand extends ListenerAdapter {
+public abstract class Command extends ListenerAdapter {
 	
 	public abstract void onGuildMessageReceived(GuildMessageReceivedEvent event);
 	
