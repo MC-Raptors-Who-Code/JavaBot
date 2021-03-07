@@ -33,5 +33,4 @@ public class Bot {
 		jda.addEventListener(new GuildMemberLeave());
 		jda.addEventListener(new AddRole());
 	}
-
 }
