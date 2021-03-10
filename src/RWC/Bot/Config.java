@@ -7,7 +7,7 @@ package RWC.Bot;
  */
 public class Config {
 	//Bot token
-	public static String TOKEN = "Put your token here";
+	public static String TOKEN = "";
 	
 	//Bot prefix
 	public static String prefix = "!";

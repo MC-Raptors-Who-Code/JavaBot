@@ -13,7 +13,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
  * @author Rose Griffin
  *
  */
-public class ChangePrefix extends AbstractCommand{
+public class ChangePrefix extends Command{
 
 	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {

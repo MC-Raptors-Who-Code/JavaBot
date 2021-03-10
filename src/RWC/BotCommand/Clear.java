@@ -20,7 +20,7 @@ import net.dv8tion.jda.internal.utils.PermissionUtil;
  * @author steum
  *
  */
-public class Clear extends AbstractCommand{
+public class Clear extends Command{
 	/**
 	 * Method to run event of clear command
 	 */
