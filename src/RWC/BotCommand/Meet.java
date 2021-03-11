@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 //Hey my name is Franco. I am making some modifications to the code.
 
-public class Meet extends AbstractCommand {
+public class Meet extends Command {
 	
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		
@@ -16,7 +16,7 @@ public class Meet extends AbstractCommand {
 			EmbedBuilder meet=new EmbedBuilder();
 			meet.setTitle("📅 Meeting Schedule");
 			meet.setDescription("Weekly meeting schedule");
-			meet.addField("TUESDAY & THURSDAY","5-6 PM",false);
+			meet.addField("THURSDAY","5-6 PM",false);
 			meet.setColor(0x3452eb);
 			meet.setFooter("Here you go!",event.getMember().getUser().getAvatarUrl());
 			
@@ -31,7 +31,12 @@ public class Meet extends AbstractCommand {
 	public String getName() {
 		return "Meet";
 	}
-
+	
+	@Override
+	public int getCategory() {
+		return 1;
+	}
+	
 	@Override
 	public String getDescription() {
 		return "Displays club meeting times";
@@ -41,5 +46,7 @@ public class Meet extends AbstractCommand {
 	public String getExample() {
 		return getDescription() + "\nExample: " + Config.prefix + "" + getName();
 	}
+
+
 
 }

@@ -10,11 +10,11 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
  * @author Rose Griffin
  *
  */
-public class Help extends AbstractCommand{
+public class Help extends Command {
 	
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		
-		AbstractCommand[] commands = {new Help(), new Meet(), new Clear(), new ChangePrefix()};
+		Command[] commands = {new Help(), new Meet(), new Clear(), new ChangePrefix()};
 		EmbedBuilder help = new EmbedBuilder();
 		String[] args = event.getMessage().getContentRaw().split("\\s+");
 		
@@ -23,7 +23,7 @@ public class Help extends AbstractCommand{
 			StringBuilder message = new StringBuilder("```\n");
 			
 			//Builds message
-			for (AbstractCommand command: commands) {
+			for (Command command: commands) {
 				message.append(Config.prefix + "" + command.getName() + " " + command.getArgs() 
 				+ String.format("%" + (command.getDescription().length() + 25 - command.getName().length() - command.getArgs().length()) 
 				+ "s", command.getDescription()) + "\n");
@@ -32,7 +32,7 @@ public class Help extends AbstractCommand{
 			
 			//Builds embed
 			help.setTitle("Commands");
-			help.addField("General:", message.toString(),true);
+			help.addField("General:", message.toString(),false);
 			help.setColor(0x592e8e);
 			help.setFooter("Here you go! For further information on a command type " + Config.prefix 
 					+ "" + getName() + " [command]" ,event.getMember().getUser().getAvatarUrl());
@@ -42,7 +42,7 @@ public class Help extends AbstractCommand{
 			
 			try {
 				
-				AbstractCommand command = findCommand(commands, args[1]);
+				Command command = findCommand(commands, args[1]);
 				
 				//Builds embed
 				help.setTitle("Help " + "" + Config.prefix + "" + command.getName());
@@ -71,6 +71,11 @@ public class Help extends AbstractCommand{
 	}
 	
 	@Override
+	public int getCategory() {
+		return 0;
+	}
+	
+	@Override
 	public String getDescription() {
 		return "Displays all commands";
 	}
@@ -92,14 +97,13 @@ public class Help extends AbstractCommand{
 	 * @return	The corresponding command
 	 * @throws IllegalArgumentException	If the string passed does not match a command name
 	 */
-	private AbstractCommand findCommand(AbstractCommand[] commands, String name) throws IllegalArgumentException {
+	private Command findCommand(Command[] commands, String name) throws IllegalArgumentException {
 		//Search for command and return it
-		for (AbstractCommand command: commands) {
+		for (Command command: commands) {
 			if ((command.getName()).equalsIgnoreCase(name))
 				return command;
 		}
 		//Throw an exception if the argument passed is not a valid command
 		throw new IllegalArgumentException();
 	}
-
 }

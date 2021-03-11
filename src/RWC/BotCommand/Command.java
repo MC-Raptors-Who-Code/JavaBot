@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
  * @author Rose Griffin
  *
  */
-public abstract class AbstractCommand extends ListenerAdapter {
+public abstract class Command extends ListenerAdapter {
 	
 	public abstract void onGuildMessageReceived(GuildMessageReceivedEvent event);
 	
@@ -18,6 +18,13 @@ public abstract class AbstractCommand extends ListenerAdapter {
 	 * For instance: Help
 	 */
 	public abstract String getName();
+	
+	/**
+	 * Returns the category of the command as an int
+	 * Admin = 0
+	 * General = 1
+	 */
+	public abstract int getCategory();
 	
 	/**
 	 * Returns the arguments of a command

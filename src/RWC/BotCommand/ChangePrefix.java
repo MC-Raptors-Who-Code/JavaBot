@@ -13,7 +13,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
  * @author Rose Griffin
  *
  */
-public class ChangePrefix extends AbstractCommand{
+public class ChangePrefix extends Command{
 
 	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
@@ -31,7 +31,7 @@ public class ChangePrefix extends AbstractCommand{
 				EmbedBuilder change = new EmbedBuilder();
 				
 				change.setTitle("⚠Syntax Error");
-				change.setDescription("Please tell me what to change the prefix too");
+				change.setDescription("Please tell me what to change the prefix to");
 				change.addField("Example", Config.prefix + "" + "changePrefix r!",false);
 				change.setColor(0xeb3434);
 				
@@ -44,6 +44,11 @@ public class ChangePrefix extends AbstractCommand{
 	@Override
 	public String getName() {
 		return "ChangePrefix";
+	}
+	
+	@Override
+	public int getCategory() {
+		return 0;
 	}
 	
 	@Override
@@ -62,5 +67,9 @@ public class ChangePrefix extends AbstractCommand{
 				+ "\nThis command changes the bot prefix"
 				+ "\n\nExample:\n" + Config.prefix + "" + getName() + " r! will change the prefix to r!";
 	}
+
+
+
+
 
 }
