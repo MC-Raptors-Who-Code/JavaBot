@@ -13,11 +13,11 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class AddRole extends ListenerAdapter {
 	
 	//Id of the message to check for reactions
-	String messageID = "817208404819968011";
+	String messageID = "";
 	//Correct Emoji
 	String emoji = "👍";
 	//Id of the role to add
-	long roleID = 817174843626881034L;
+	long roleID = 0L;
 	
 	@Override
 	public void onMessageReactionAdd(MessageReactionAddEvent event) {
