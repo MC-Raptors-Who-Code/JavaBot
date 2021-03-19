@@ -2,10 +2,7 @@ package RWC.Bot;
 
 import javax.security.auth.login.LoginException;
 
-import RWC.BotCommand.ChangePrefix;
-import RWC.BotCommand.Clear;
-import RWC.BotCommand.Help;
-import RWC.BotCommand.Meet;
+import RWC.BotCommand.CommandManager;
 import RWC.BotEvent.AddRole;
 import RWC.BotEvent.GuildMemberJoin;
 import RWC.BotEvent.GuildMemberLeave;
@@ -24,11 +21,7 @@ public class Bot {
 		jda = JDABuilder.createDefault(Config.TOKEN).build();
 		jda.getPresence().setStatus(OnlineStatus.IDLE);
 		jda.getPresence().setActivity(Activity.watching("One Punch Man"));
-		
-		jda.addEventListener(new Help());
-		jda.addEventListener(new Meet());
-		jda.addEventListener(new Clear());
-		jda.addEventListener(new ChangePrefix());
+		jda.addEventListener(new CommandManager());
 		jda.addEventListener(new GuildMemberJoin());
 		jda.addEventListener(new GuildMemberLeave());
 		jda.addEventListener(new AddRole());

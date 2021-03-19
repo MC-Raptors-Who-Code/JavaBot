@@ -16,28 +16,24 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 public class ChangePrefix extends Command{
 
 	@Override
-	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-		String[] args = event.getMessage().getContentRaw().split("\\s+");
+	public void onGuildMessageReceived(GuildMessageReceivedEvent event, String[] args) {
 		
-		if(args[0].equalsIgnoreCase(Config.prefix + getName())) {
+		//Check to see if user has permission to use command
+		if (!PermissionUtil.checkPermission(event.getChannel(),event.getMember(), Permission.ADMINISTRATOR)) {
+			event.getChannel().sendMessage("You do not have permission to use this command").queue();
+		} else if (args.length == 2) {
+			Config.setPrefix(args[1]);
+			event.getChannel().sendMessage("Prefix successfully changed to " + Config.prefix + "\nTry " + Config.prefix + "Help").queue();
+		} else {
+			EmbedBuilder change = new EmbedBuilder();
 			
-			//Check to see if user has permission to use command
-			if (!PermissionUtil.checkPermission(event.getChannel(),event.getMember(), Permission.ADMINISTRATOR)) {
-				event.getChannel().sendMessage("You do not have permission to use this command").queue();
-			} else if (args.length == 2) {
-				Config.setPrefix(args[1]);
-				event.getChannel().sendMessage("Prefix successfully changed to " + Config.prefix + "\nTry " + Config.prefix + "Help").queue();
-			} else {
-				EmbedBuilder change = new EmbedBuilder();
-				
-				change.setTitle("⚠Syntax Error");
-				change.setDescription("Please tell me what to change the prefix to");
-				change.addField("Example", Config.prefix + "" + "changePrefix r!",false);
-				change.setColor(0xeb3434);
-				
-				event.getChannel().sendMessage(change.build()).queue();
-				change.clear();
-			}
+			change.setTitle("⚠Syntax Error");
+			change.setDescription("Please tell me what to change the prefix to");
+			change.addField("Example", Config.prefix + "" + "changePrefix r!",false);
+			change.setColor(0xeb3434);
+			
+			event.getChannel().sendMessage(change.build()).queue();
+			change.clear();
 		}
 	}
 
