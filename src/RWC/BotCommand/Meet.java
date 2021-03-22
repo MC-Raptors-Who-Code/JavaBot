@@ -8,23 +8,17 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 public class Meet extends Command {
 	
-	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+	public void onGuildMessageReceived(GuildMessageReceivedEvent event, String[] args) {
+		EmbedBuilder meet = new EmbedBuilder();
+		meet.setTitle("📅 Meeting Schedule");
+		meet.setDescription("Weekly meeting schedule");
+		meet.addField("THURSDAY","5-6 PM",false);
+		meet.setColor(0x3452eb);
+		meet.setFooter("Here you go!",event.getMember().getUser().getAvatarUrl());
 		
-		String[] args=event.getMessage().getContentRaw().split("\\s+");
-		
-		if(args[0].equalsIgnoreCase(Config.prefix + getName())) {
-			EmbedBuilder meet=new EmbedBuilder();
-			meet.setTitle("📅 Meeting Schedule");
-			meet.setDescription("Weekly meeting schedule");
-			meet.addField("THURSDAY","5-6 PM",false);
-			meet.setColor(0x3452eb);
-			meet.setFooter("Here you go!",event.getMember().getUser().getAvatarUrl());
-			
-			//event.getChannel().sendTyping().queue();
-			event.getChannel().sendMessage(meet.build()).queue();
-			meet.clear();
-			
-		}
+		//event.getChannel().sendTyping().queue();
+		event.getChannel().sendMessage(meet.build()).queue();
+		meet.clear();
 	}
 
 	@Override

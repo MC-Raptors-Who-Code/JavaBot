@@ -1,29 +1,34 @@
 package RWC.BotCommand;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import RWC.Bot.Config;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 /**
  * Displays name and description of each command in an embed
- * 
  * @author Rose Griffin
  *
  */
 public class Help extends Command {
 	
-	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+	private Map<String, Command> commands = new HashMap<String, Command>();
+	
+	public void onGuildMessageReceived(GuildMessageReceivedEvent event, String[] args) {
 		
-		Command[] commands = {new Help(), new Meet(), new Clear(), new ChangePrefix()};
+		commands = CommandManager.getCommands();
+		ArrayList<Command> commandList = new ArrayList<Command>(commands.values());
 		EmbedBuilder help = new EmbedBuilder();
-		String[] args = event.getMessage().getContentRaw().split("\\s+");
 		
-		if(args.length == 1 && args[0].equalsIgnoreCase(Config.prefix + getName())) {
-
+		if(args.length == 1) {
+			
 			StringBuilder message = new StringBuilder("```\n");
 			
 			//Builds message
-			for (Command command: commands) {
+			for (Command command : commandList) {
 				message.append(Config.prefix + "" + command.getName() + " " + command.getArgs() 
 				+ String.format("%" + (command.getDescription().length() + 25 - command.getName().length() - command.getArgs().length()) 
 				+ "s", command.getDescription()) + "\n");
@@ -38,11 +43,10 @@ public class Help extends Command {
 					+ "" + getName() + " [command]" ,event.getMember().getUser().getAvatarUrl());
 			event.getChannel().sendMessage(help.build()).queue();
 			
-		} else if (args.length > 1 && args[0].equalsIgnoreCase(Config.prefix + getName())) {
+		} else if (args.length == 2) {
 			
 			try {
-				
-				Command command = findCommand(commands, args[1]);
+				Command command = commands.get(args[1]);
 				
 				//Builds embed
 				help.setTitle("Help " + "" + Config.prefix + "" + command.getName());
@@ -56,12 +60,21 @@ public class Help extends Command {
 				//Builds embed
 				help.setTitle("⚠Syntax Error");
 				help.setDescription(args[1] + " is not a valid command");
-				help.addField("Example","r!help clear",false);
+				help.addField("Example", Config.prefix + "help clear",false);
 				help.setColor(0xeb3434);
 				
 				event.getChannel().sendMessage(help.build()).queue();
 				help.clear();
 			}
+		} else {
+			//Builds embed
+			help.setTitle("⚠Syntax Error");
+			help.setDescription("Too many arguments");
+			help.addField("Example", Config.prefix + "help clear",false);
+			help.setColor(0xeb3434);
+			
+			event.getChannel().sendMessage(help.build()).queue();
+			help.clear();
 		}
 	}
 	
@@ -86,24 +99,5 @@ public class Help extends Command {
 		+ Config.prefix + "" + getName() + " Displays all commands.\n"
 		+ Config.prefix + "" + getName() + " [command] provides further information on a command\n"
 		+ "\nExample:\n" + Config.prefix + "" + getName() + " clear will display futher information on clear";
-	}
-	
-	/**
-	 * Searches for the corresponding command based on the string passed
-	 * NOTE: The search algorithm must be changed in the future when more commands are added.
-	 * 
-	 * @param commands	Array containing all commands
-	 * @param name	Name of the command
-	 * @return	The corresponding command
-	 * @throws IllegalArgumentException	If the string passed does not match a command name
-	 */
-	private Command findCommand(Command[] commands, String name) throws IllegalArgumentException {
-		//Search for command and return it
-		for (Command command: commands) {
-			if ((command.getName()).equalsIgnoreCase(name))
-				return command;
-		}
-		//Throw an exception if the argument passed is not a valid command
-		throw new IllegalArgumentException();
 	}
 }
