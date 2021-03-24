@@ -13,8 +13,10 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
  * @author Rose Griffin
  *
  */
-public class ChangePrefix extends Command{
-
+public class ChangePrefix extends Command {
+	
+	private String[] args = {"prefix"};
+	
 	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event, String[] args) {
 		
@@ -48,8 +50,8 @@ public class ChangePrefix extends Command{
 	}
 	
 	@Override
-	public String getArgs() {
-		return "[prefix]";
+	public String[] getArgs() {
+		return args;
 	}
 
 	@Override
@@ -59,7 +61,7 @@ public class ChangePrefix extends Command{
 
 	@Override
 	public String getExample() {
-		return "Argument " + getArgs() + ": The prefix to be changed into"
+		return "Argument " + getArgs()[0] + ": The prefix to be changed into"
 				+ "\nThis command changes the bot prefix"
 				+ "\n\nExample:\n" + Config.prefix + "" + getName() + " r! will change the prefix to r!";
 	}

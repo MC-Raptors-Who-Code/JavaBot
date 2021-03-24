@@ -30,8 +30,8 @@ public abstract class Command extends ListenerAdapter {
 	 * If the command does not have arguments, return an empty string. Only override this if the
 	 * command contains arguments
 	 */
-	public String getArgs() {
-		return "";
+	public String[] getArgs() {
+		return new String[0];
 	}
 	
 	/**
@@ -40,7 +40,7 @@ public abstract class Command extends ListenerAdapter {
 	public abstract String getDescription();
 	
 	/**
-	 * Returns a message that further explains a command's functions, its argument(s), and provides
+	 * Returns a string that further explains a command's functions, its argument(s), and provides
 	 * examples on usage.
 	 */
 	public abstract String getExample();
