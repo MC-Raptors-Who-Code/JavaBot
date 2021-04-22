@@ -29,9 +29,11 @@ public class Help extends Command {
 			
 			//Builds message
 			for (Command command : commandList) {
-				message.append(Config.prefix + "" + command.getName() + " " + command.getArgs() 
-				+ String.format("%" + (command.getDescription().length() + 25 - command.getName().length() - command.getArgs().length()) 
-				+ "s", command.getDescription()) + "\n");
+				String argsMsg = printArgs(command.getArgs());
+				String desc = command.getDescription();
+				String fDesc = String.format("%" + (desc.length() + 25 - command.getName().length() - argsMsg.length()) + "s", desc);
+				
+				message.append(Config.prefix + "" + command.getName() + " " + argsMsg + fDesc + "\n");
 			}
 			message.append("\n```");
 			
@@ -99,5 +101,16 @@ public class Help extends Command {
 		+ Config.prefix + "" + getName() + " Displays all commands.\n"
 		+ Config.prefix + "" + getName() + " [command] provides further information on a command\n"
 		+ "\nExample:\n" + Config.prefix + "" + getName() + " clear will display futher information on clear";
+	}
+	
+	/**
+	 * Returns a string that displays each argument for a command
+	 */
+	public String printArgs(String[] args) {
+		String message = "";
+		for (int i = 0; i < args.length; i++) {
+			message += "(" + args[i] + ") ";
+		}
+		return message;
 	}
 }

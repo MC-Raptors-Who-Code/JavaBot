@@ -21,6 +21,9 @@ import net.dv8tion.jda.internal.utils.PermissionUtil;
  *
  */
 public class Clear extends Command{
+	
+	private String[] args = {"amount"};
+	
 	/**
 	 * Method to run event of clear command
 	 */
@@ -96,8 +99,8 @@ public class Clear extends Command{
 	}
 	
 	@Override
-	public String getArgs() {
-		return "[amount]";
+	public String[] getArgs() {
+		return args;
 	}
 
 	@Override
@@ -107,7 +110,7 @@ public class Clear extends Command{
 	
 	@Override
 	public String getExample() {
-		return "Argument " + getArgs() + ": The amount of messages to be deleted. Must be between 1-100 inclusive."
+		return "Argument " + getArgs()[0] + ": The amount of messages to be deleted. Must be between 1-100 inclusive."
 				+ "\nThis command deletes a specified amount of previous messages, but cannot delete ones older than 2 weeks"
 				+ "\n\nExample:\n" + Config.prefix + "" + getName() + " 5 will delete 5 messages";
 	}
