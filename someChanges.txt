@@ -1,0 +1,10 @@
+Hello, 
+
+I am trying to get used to git, cloning and forking. Thus this file is to be disregarded. 
+It is really just a coprse without purpose. 
+
+
+NEW STUFF!!
+
+Best, 
+Franco
