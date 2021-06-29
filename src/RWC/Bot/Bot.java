@@ -15,7 +15,6 @@ public class Bot {
 	
 	public static JDA jda;
 	
-	//Test
 	//Main method
 
 	public static void main(String[]args) throws LoginException{
