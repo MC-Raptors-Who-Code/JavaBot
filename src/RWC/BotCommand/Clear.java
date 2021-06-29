@@ -111,7 +111,7 @@ public class Clear extends Command{
 	@Override
 	public String getExample() {
 		return "Argument " + getArgs()[0] + ": The amount of messages to be deleted. Must be between 1-100 inclusive."
-				+ "\nThis command deletes a specified amount of previous messages, but cannot delete ones older than 2 weeks"
+				+ "\n\nThis command deletes a specified amount of previous messages, but cannot delete ones older than 2 weeks"
 				+ "\n\nExample:\n" + Config.prefix + "" + getName() + " 5 will delete 5 messages";
 	}
 }

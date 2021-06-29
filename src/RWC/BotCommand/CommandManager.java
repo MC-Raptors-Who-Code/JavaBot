@@ -1,5 +1,6 @@
 package RWC.BotCommand;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,13 +21,17 @@ public class CommandManager extends ListenerAdapter {
 	 */
 	private static Map<String, Command> commands = new HashMap<String, Command>();
 	
+	//The following ArrayLists hold commands based on respective category
+	private static ArrayList<Command> adminCommands = new ArrayList<Command>();
+	private static ArrayList<Command> generalCommands = new ArrayList<Command>();
+	
 	/**
-	 * Add all commands to command map
+	 * Call addCommand for each command
 	 */
 	public CommandManager() {
-		addCommand(new Clear());
-		addCommand(new Meet());
 		addCommand(new Help());
+		addCommand(new Meet());
+		addCommand(new Clear());
 		addCommand(new ChangePrefix());
 	}
 	
@@ -43,18 +48,33 @@ public class CommandManager extends ListenerAdapter {
 			if (commands.containsKey(commandName)) {
 				commands.get(commandName).onGuildMessageReceived(event, args);
 			} else {
-				System.out.println(commandName + " is not a command.");
+				event.getChannel().sendMessage(commandName + " is not a command.").queue();
 			}
 		}
 	}
 	
 	/**
-	 * Adds a command to the command map
+	 * Adds a command to the command map and to its category ArrayList
 	 * @param command
 	 */
 	private void addCommand(Command command) {
 		if (!commands.containsKey(command.getName())) {
+			//Add to command map
 			commands.put(command.getName().toLowerCase(), command);
+			
+			//Determine which ArrayList the command should be added to
+			int category = command.getCategory();
+			switch (category) {
+			case 0:
+				adminCommands.add(command);
+				break;
+			case 1:
+				generalCommands.add(command);
+				break;
+			default:
+				System.out.println(command.getName() 
+						+ " has not been assigned to a valid category and will not appear in the help menu until fixed.");
+			}
 		} else {
 			System.out.println("Unable to add " + command.getName() + " because a command with the same name already exists.");
 		}
@@ -74,6 +94,14 @@ public class CommandManager extends ListenerAdapter {
 	 */
 	public static Map<String, Command> getCommands(){
 		return commands;
+	}
+
+	public static ArrayList<Command> getAdminCmd() {
+		return adminCommands;
+	}
+
+	public static ArrayList<Command> getGenCmd() {
+		return generalCommands;
 	}
 
 }
