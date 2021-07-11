@@ -38,7 +38,7 @@ public class Meet extends Command {
 
 	@Override
 	public String getExample() {
-		return getDescription() + "\nExample: " + Config.prefix + "" + getName();
+		return getDescription() + "\nExample: " + Config.PREFIX + "" + getName();
 	}
 
 

@@ -34,7 +34,7 @@ public class Help extends Command {
 			help.addField("Admin Commands", printMessage(adminCommands),false);
 			help.addField("General Commands", printMessage(generalCommands),false);
 			help.setColor(0x592e8e);
-			help.setFooter("Here you go! For further information on a command type " + Config.prefix 
+			help.setFooter("Here you go! For further information on a command type " + Config.PREFIX 
 					+ "" + getName() + " [command]" ,event.getMember().getUser().getAvatarUrl());
 			event.getChannel().sendMessage(help.build()).queue();
 		
@@ -44,7 +44,7 @@ public class Help extends Command {
 				Command command = commands.get(args[1]);
 				
 				
-				help.setTitle("Help " + "" + Config.prefix + "" + command.getName());
+				help.setTitle("Help " + "" + Config.PREFIX + "" + command.getName());
 				help.setDescription(command.getExample());
 				help.setColor(0x592e8e);
 				help.setFooter("Here you go!",event.getMember().getUser().getAvatarUrl());
@@ -55,7 +55,7 @@ public class Help extends Command {
 				
 				help.setTitle("⚠Syntax Error");
 				help.setDescription(args[1] + " is not a valid command");
-				help.addField("Example", Config.prefix + "help clear",false);
+				help.addField("Example", Config.PREFIX + "help clear",false);
 				help.setColor(0xeb3434);
 				
 				event.getChannel().sendMessage(help.build()).queue();
@@ -66,7 +66,7 @@ public class Help extends Command {
 			
 			help.setTitle("⚠Syntax Error");
 			help.setDescription("Too many arguments");
-			help.addField("Example", Config.prefix + "help clear",false);
+			help.addField("Example", Config.PREFIX + "help clear",false);
 			help.setColor(0xeb3434);
 			
 			event.getChannel().sendMessage(help.build()).queue();
@@ -92,9 +92,9 @@ public class Help extends Command {
 	@Override
 	public String getExample() {
 		return "Two uses:\n"
-		+ Config.prefix + "" + getName() + " Displays all commands.\n"
-		+ Config.prefix + "" + getName() + " (command) provides further information on a command\n"
-		+ "\nExample:\n" + Config.prefix + "" + getName() + " clear will display futher information on clear";
+		+ Config.PREFIX + "" + getName() + " Displays all commands.\n"
+		+ Config.PREFIX + "" + getName() + " (command) provides further information on a command\n"
+		+ "\nExample:\n" + Config.PREFIX + "" + getName() + " clear will display futher information on clear";
 	}
 	
 	/**
@@ -120,7 +120,7 @@ public class Help extends Command {
 			String desc = command.getDescription();
 			String fDesc = String.format("%" + (desc.length() + 25 - command.getName().length() - argsMsg.length()) + "s", desc);
 			
-			message.append(Config.prefix + "" + command.getName() + " " + argsMsg + fDesc + "\n");
+			message.append(Config.PREFIX + "" + command.getName() + " " + argsMsg + fDesc + "\n");
 		}
 		message.append("\n```");
 		return message.toString();

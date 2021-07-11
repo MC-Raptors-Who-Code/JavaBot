@@ -36,7 +36,7 @@ public class Clear extends Command{
 		if(args.length < 2) {
 			clear.setTitle("⚠Syntax Error");
 			clear.setDescription("Please tell me how many messages I should delete");
-			clear.addField("Example", Config.prefix + "" + "clear 50",false);
+			clear.addField("Example", Config.PREFIX + "" + "clear 50",false);
 			clear.setColor(0xeb3434);
 			
 			event.getChannel().sendMessage(clear.build()).queue();
@@ -112,6 +112,6 @@ public class Clear extends Command{
 	public String getExample() {
 		return "Argument " + getArgs()[0] + ": The amount of messages to be deleted. Must be between 1-100 inclusive."
 				+ "\n\nThis command deletes a specified amount of previous messages, but cannot delete ones older than 2 weeks"
-				+ "\n\nExample:\n" + Config.prefix + "" + getName() + " 5 will delete 5 messages";
+				+ "\n\nExample:\n" + Config.PREFIX + "" + getName() + " 5 will delete 5 messages";
 	}
 }

@@ -10,10 +10,5 @@ public class Config {
 	public static String TOKEN = "";
 	
 	//Bot prefix
-	public static String prefix = "j!";
-	
-	public static void setPrefix(String newPrefix) {
-		prefix = newPrefix;
-	}
-	
+	public static String PREFIX = "j!";
 }

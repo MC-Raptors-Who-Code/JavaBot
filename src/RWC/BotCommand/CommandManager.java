@@ -32,15 +32,14 @@ public class CommandManager extends ListenerAdapter {
 		addCommand(new Help());
 		addCommand(new Meet());
 		addCommand(new Clear());
-		addCommand(new ChangePrefix());
 	}
 	
 	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		String message = event.getMessage().getContentRaw();
-		if(message.startsWith(Config.prefix)) {
+		if(message.startsWith(Config.PREFIX)) {
 			//Create an array with all arguments of the message
-			message = message.replace(Config.prefix, "");
+			message = message.replace(Config.PREFIX, "");
 			String[] args = message.split("\\s+");
 			String commandName = args[0].toLowerCase();
 			
