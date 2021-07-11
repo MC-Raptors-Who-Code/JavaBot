@@ -16,7 +16,6 @@ public class Bot {
 	public static JDA jda;
 	
 	//Main method
-	//Test
 	public static void main(String[]args) throws LoginException{
 		jda = JDABuilder.createDefault(Config.TOKEN).build();
 		jda.getPresence().setStatus(OnlineStatus.IDLE);
