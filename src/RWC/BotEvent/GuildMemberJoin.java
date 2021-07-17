@@ -26,7 +26,7 @@ public class GuildMemberJoin extends ListenerAdapter{
 		join.setColor(0xdceb34);
 		join.setDescription(messages[number].replace("[member]", event.getMember().getAsMention()));
 		
-		event.getGuild().getDefaultChannel().sendMessage(join.build()).queue();
+		event.getGuild().getDefaultChannel().sendMessageEmbeds(join.build()).queue();
 		//Add role
 		event.getGuild().modifyMemberRoles(event.getMember(), event.getGuild().getRolesByName("Member", true)).complete();
 	}

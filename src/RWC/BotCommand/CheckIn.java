@@ -6,7 +6,6 @@ import java.util.List;
 import com.google.api.services.sheets.v4.model.ValueRange;
 
 import RWC.Bot.Bot;
-import RWC.Bot.Config;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -57,38 +56,6 @@ public class CheckIn extends Command {
             }
         }
 	}
-	
-	/**
-	 * Adds the member role to a user through the spreadsheet linked with the new member form.
-	 * 
-	 * @param event
-	 * @throws IOException
-	 */
-    public static void addRole(GuildMessageReceivedEvent event) throws IOException {
-        ValueRange response = Bot.service.spreadsheets().values().get(spreadsheetId, RANGE).execute();
-        List<List<Object>> values = response.getValues();
-        
-        if (values == null || values.isEmpty()) {
-            System.out.println("No data found.");
-        } else {
-        	Role role = event.getJDA().getRoleById(roleId);
-            for (List row : values) {
-                Member member = event.getGuild().getMemberByTag((String) row.get(2));
-                /*
-                 * Check if member can be given the member role, and if so,
-                 * give them the role and change their nickname to their first name.
-                 * This fails if they have not been cached, their tag is wrong, or they have already been given the role.
-                 */
-                if (member != null && !member.getRoles().contains(role)) {
-	                event.getGuild().addRoleToMember(member, role).queue();
-	                event.getGuild().modifyNickname(member, (String) row.get(0)).queue();
-	                event.getChannel().sendMessage(member.getAsMention() + " is now a member!").queue();
-                } else {
-                	System.out.println("Unable to give " + row.get(2) + " the member role.");
-                }
-            }
-        }
-    }
 
 	@Override
 	public String getName() {
@@ -97,7 +64,7 @@ public class CheckIn extends Command {
 
 	@Override
 	public int getCategory() {
-		return 0;
+		return 1;
 	}
 
 	@Override
@@ -107,7 +74,7 @@ public class CheckIn extends Command {
 
 	@Override
 	public String getExample() {
-		return getDescription() + "\nExample: " + Config.PREFIX + "" + getName();
+		return getDescription() + "\nExample: " + Bot.PREFIX + "" + getName();
 	}
 	
 

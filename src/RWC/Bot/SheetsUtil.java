@@ -31,7 +31,7 @@ public final class SheetsUtil {
 	private static final List<String> SCOPES = Collections.singletonList(SheetsScopes.SPREADSHEETS_READONLY);
 	
 	/**
-	* Creates sheets object that allows for reading from a spreadsheet
+	* Creates and returns a sheets object that allows for reading from a spreadsheet
 	* @throws GeneralSecurityException
 	* @throws IOException
 	*/

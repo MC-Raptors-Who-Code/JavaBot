@@ -13,11 +13,16 @@ import net.dv8tion.jda.api.utils.MemberCachePolicy;
 public class Bot {
 	
 	public static Sheets service;
+	public static final String PREFIX = "!";
+	private static String token;
 	
 	//Main method
-	public static void main(String[]args) throws GeneralSecurityException, IOException {
+	public static void main(String[] args) throws GeneralSecurityException, IOException {
 		
-		JDABuilder.createDefault(Config.TOKEN)
+		//Set bot token
+		token = args[0];
+		
+		JDABuilder.createDefault(token)
 				.enableIntents(GatewayIntent.GUILD_MEMBERS)
 				.setMemberCachePolicy(MemberCachePolicy.ALL)
 				.addEventListeners(new CommandManager())

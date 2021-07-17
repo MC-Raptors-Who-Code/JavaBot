@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import RWC.Bot.Config;
+import RWC.Bot.Bot;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -38,9 +38,9 @@ public class CommandManager extends ListenerAdapter {
 	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		String message = event.getMessage().getContentRaw();
-		if(message.startsWith(Config.PREFIX)) {
+		if(message.startsWith(Bot.PREFIX)) {
 			//Create an array with all arguments of the message
-			message = message.replace(Config.PREFIX, "");
+			message = message.replace(Bot.PREFIX, "");
 			String[] args = message.split("\\s+");
 			String commandName = args[0].toLowerCase();
 			

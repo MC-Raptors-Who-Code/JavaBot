@@ -1,6 +1,6 @@
 package RWC.BotCommand;
 
-import RWC.Bot.Config;
+import RWC.Bot.Bot;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
@@ -37,7 +37,7 @@ public class Meet extends Command {
 
 	@Override
 	public String getExample() {
-		return getDescription() + "\nExample: " + Config.PREFIX + "" + getName();
+		return getDescription() + "\nExample: " + Bot.PREFIX + "" + getName();
 	}
 
 

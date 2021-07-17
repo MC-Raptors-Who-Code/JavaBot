@@ -19,7 +19,7 @@ public class GuildMemberLeave extends ListenerAdapter{
 		leave.setColor(0x3003fc);
 		leave.setDescription(messages[number].replace("[member]", event.getMember().getAsMention()));
 		
-		event.getGuild().getDefaultChannel().sendMessage(leave.build()).queue();
+		event.getGuild().getDefaultChannel().sendMessageEmbeds(leave.build()).queue();
 		//Add role
 		event.getGuild().modifyMemberRoles(event.getMember(), event.getGuild().getRolesByName("Member", true)).complete();
 	}

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import RWC.Bot.Config;
+import RWC.Bot.Bot;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
@@ -34,7 +34,7 @@ public class Help extends Command {
 			help.addField("Admin Commands", printMessage(adminCommands),false);
 			help.addField("General Commands", printMessage(generalCommands),false);
 			help.setColor(0x592e8e);
-			help.setFooter("Here you go! For further information on a command type " + Config.PREFIX 
+			help.setFooter("Here you go! For further information on a command type " + Bot.PREFIX 
 					+ "" + getName() + " [command]" ,event.getMember().getUser().getAvatarUrl());
 			event.getChannel().sendMessageEmbeds(help.build()).queue();
 		
@@ -44,7 +44,7 @@ public class Help extends Command {
 				Command command = commands.get(args[1]);
 				
 				
-				help.setTitle("Help " + "" + Config.PREFIX + "" + command.getName());
+				help.setTitle("Help " + "" + Bot.PREFIX + "" + command.getName());
 				help.setDescription(command.getExample());
 				help.setColor(0x592e8e);
 				help.setFooter("Here you go!",event.getMember().getUser().getAvatarUrl());
@@ -53,7 +53,7 @@ public class Help extends Command {
 			} catch (Exception e) {
 				help.setTitle("⚠Syntax Error");
 				help.setDescription(args[1] + " is not a valid command");
-				help.addField("Example", Config.PREFIX + "help clear",false);
+				help.addField("Example", Bot.PREFIX + "help clear",false);
 				help.setColor(0xeb3434);
 				
 				event.getChannel().sendMessageEmbeds(help.build()).queue();
@@ -64,7 +64,7 @@ public class Help extends Command {
 			
 			help.setTitle("⚠Syntax Error");
 			help.setDescription("Too many arguments");
-			help.addField("Example", Config.PREFIX + "help clear",false);
+			help.addField("Example", Bot.PREFIX + "help clear",false);
 			help.setColor(0xeb3434);
 			
 			event.getChannel().sendMessageEmbeds(help.build()).queue();
@@ -90,9 +90,9 @@ public class Help extends Command {
 	@Override
 	public String getExample() {
 		return "Two uses:\n"
-		+ Config.PREFIX + "" + getName() + " Displays all commands.\n"
-		+ Config.PREFIX + "" + getName() + " (command) provides further information on a command\n"
-		+ "\nExample:\n" + Config.PREFIX + "" + getName() + " clear will display futher information on clear";
+		+ Bot.PREFIX + "" + getName() + " Displays all commands.\n"
+		+ Bot.PREFIX + "" + getName() + " (command) provides further information on a command\n"
+		+ "\nExample:\n" + Bot.PREFIX + "" + getName() + " clear will display futher information on clear";
 	}
 	
 	/**
@@ -118,7 +118,7 @@ public class Help extends Command {
 			String desc = command.getDescription();
 			String fDesc = String.format("%" + (desc.length() + 25 - command.getName().length() - argsMsg.length()) + "s", desc);
 			
-			message.append(Config.PREFIX + "" + command.getName() + " " + argsMsg + fDesc + "\n");
+			message.append(Bot.PREFIX + "" + command.getName() + " " + argsMsg + fDesc + "\n");
 		}
 		message.append("\n```");
 		return message.toString();
