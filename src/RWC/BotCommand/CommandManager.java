@@ -32,6 +32,7 @@ public class CommandManager extends ListenerAdapter {
 		addCommand(new Help());
 		addCommand(new Meet());
 		addCommand(new Clear());
+		addCommand(new CheckIn());
 	}
 	
 	@Override
