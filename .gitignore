@@ -1,4 +1,3 @@
 /target/
-src/RWC/Bot/Config.java
 src/resources/credentials.json
 tokens/StoredCredential
