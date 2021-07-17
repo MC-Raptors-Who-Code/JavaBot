@@ -16,8 +16,7 @@ public class Meet extends Command {
 		meet.setColor(0x3452eb);
 		meet.setFooter("Here you go!",event.getMember().getUser().getAvatarUrl());
 		
-		//event.getChannel().sendTyping().queue();
-		event.getChannel().sendMessage(meet.build()).queue();
+		event.getChannel().sendMessageEmbeds(meet.build()).queue();
 		meet.clear();
 	}
 

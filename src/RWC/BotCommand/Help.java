@@ -36,7 +36,7 @@ public class Help extends Command {
 			help.setColor(0x592e8e);
 			help.setFooter("Here you go! For further information on a command type " + Config.PREFIX 
 					+ "" + getName() + " [command]" ,event.getMember().getUser().getAvatarUrl());
-			event.getChannel().sendMessage(help.build()).queue();
+			event.getChannel().sendMessageEmbeds(help.build()).queue();
 		
 		//Display help for designated command
 		} else if (args.length == 2) {
@@ -49,16 +49,14 @@ public class Help extends Command {
 				help.setColor(0x592e8e);
 				help.setFooter("Here you go!",event.getMember().getUser().getAvatarUrl());
 				
-				event.getChannel().sendMessage(help.build()).queue();
+				event.getChannel().sendMessageEmbeds(help.build()).queue();
 			} catch (Exception e) {
-				
-				
 				help.setTitle("⚠Syntax Error");
 				help.setDescription(args[1] + " is not a valid command");
 				help.addField("Example", Config.PREFIX + "help clear",false);
 				help.setColor(0xeb3434);
 				
-				event.getChannel().sendMessage(help.build()).queue();
+				event.getChannel().sendMessageEmbeds(help.build()).queue();
 				help.clear();
 			}
 		//Display when help command is used incorrectly
@@ -69,7 +67,7 @@ public class Help extends Command {
 			help.addField("Example", Config.PREFIX + "help clear",false);
 			help.setColor(0xeb3434);
 			
-			event.getChannel().sendMessage(help.build()).queue();
+			event.getChannel().sendMessageEmbeds(help.build()).queue();
 			help.clear();
 		}
 	}
