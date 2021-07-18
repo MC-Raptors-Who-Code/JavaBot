@@ -40,7 +40,7 @@ public class CheckIn extends Command {
         } else {
         	Role role = event.getJDA().getRoleById(roleId);
             for (List row : values) {
-            	Member member = event.getGuild().getMemberByTag((String) row.get(2));
+            	Member member = event.getGuild().getMemberByTag((String) row.get(1));
                 /*
                  * Check if member can be given the member role, and if so,
                  * give them the role and change their nickname to their first name.
@@ -51,7 +51,7 @@ public class CheckIn extends Command {
 	                event.getGuild().modifyNickname(member, (String) row.get(0)).queue();
 	                event.getChannel().sendMessage(member.getAsMention() + " is now a member!").queue();
                 } else {
-                	System.out.println("Unable to give " + row.get(2) + " the member role.");
+                	System.out.println("Unable to give " + row.get(1) + " the member role.");
                 }
             }
         }
