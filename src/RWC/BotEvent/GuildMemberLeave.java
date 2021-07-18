@@ -1,4 +1,4 @@
-package rwc.botevent;
+package RWC.BotEvent;
 
 import java.util.Random;
 

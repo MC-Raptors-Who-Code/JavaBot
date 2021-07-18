@@ -1,9 +1,9 @@
-package rwc.bot;
+package RWC.Bot;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import com.google.api.services.sheets.v4.Sheets;
-import rwc.botcommand.CommandManager;
+import RWC.BotCommand.CommandManager;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;

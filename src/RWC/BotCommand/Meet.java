@@ -1,6 +1,6 @@
-package rwc.botcommand;
+package RWC.BotCommand;
 
-import rwc.bot.Bot;
+import RWC.Bot.Bot;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 

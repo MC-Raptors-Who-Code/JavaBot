@@ -1,12 +1,12 @@
-package rwc.botcommand;
+package RWC.BotCommand;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import RWC.Bot.Bot;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import rwc.bot.Bot;
 
 /**
  * Displays name and description of each command in an embed

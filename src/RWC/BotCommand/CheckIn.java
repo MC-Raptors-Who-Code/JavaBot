@@ -1,14 +1,14 @@
-package rwc.botcommand;
+package RWC.BotCommand;
 
 import java.io.IOException;
 import java.util.List;
 
 import com.google.api.services.sheets.v4.model.ValueRange;
 
+import RWC.Bot.Bot;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import rwc.bot.Bot;
 
 /**
  * Command that adds the member role to a person in the server through completion of a form
