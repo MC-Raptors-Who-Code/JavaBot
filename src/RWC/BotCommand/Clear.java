@@ -1,8 +1,8 @@
-package RWC.BotCommand;
+package rwc.botcommand;
 
 import java.util.List;
 
-import RWC.Bot.Bot;
+import rwc.bot.Bot;
 
 /**
 * Some changes
