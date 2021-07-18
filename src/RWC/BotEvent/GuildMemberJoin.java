@@ -19,6 +19,7 @@ public class GuildMemberJoin extends ListenerAdapter{
 			"A wild [member] appeared."
 		};
 	
+	@Override
 	public void onGuildMemberJoin(GuildMemberJoinEvent event) {
 		Random rand =new Random();
 		int number=rand.nextInt(messages.length);

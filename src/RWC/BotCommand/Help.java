@@ -19,6 +19,7 @@ public class Help extends Command {
 	private ArrayList<Command> adminCommands = new ArrayList<Command>();
 	private ArrayList<Command> generalCommands = new ArrayList<Command>();
 	
+	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event, String[] args) {
 		
 		commands = CommandManager.getCommands();

@@ -12,6 +12,7 @@ public class GuildMemberLeave extends ListenerAdapter{
 			"No.[member] don't leave us💔"
 		};
 	
+	@Override
 	public void onGuildMemberJoin(GuildMemberJoinEvent event) {
 		Random rand =new Random();
 		int number=rand.nextInt(messages.length);

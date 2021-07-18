@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 public class Meet extends Command {
 	
+	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event, String[] args) {
 		EmbedBuilder meet = new EmbedBuilder();
 		meet.setTitle("📅 Meeting Schedule");

@@ -26,6 +26,7 @@ public class Clear extends Command {
 	/**
 	 * Method to run event of clear command
 	 */
+	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event, String[] args) {
 		
 		//Embed to print messages
