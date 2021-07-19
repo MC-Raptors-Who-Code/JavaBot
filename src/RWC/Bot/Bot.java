@@ -1,29 +1,35 @@
 package RWC.Bot;
 
-import javax.security.auth.login.LoginException;
-
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+import com.google.api.services.sheets.v4.Sheets;
 import RWC.BotCommand.CommandManager;
-import RWC.BotEvent.AddRole;
-import RWC.BotEvent.GuildMemberJoin;
-import RWC.BotEvent.GuildMemberLeave;
-import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
 public class Bot {
 	
-	public static JDA jda;
+	public static Sheets service;
+	public static final String PREFIX = "!";
+	private static String token;
 	
 	//Main method
-
-	public static void main(String[]args) throws LoginException{
-		jda = JDABuilder.createDefault(Config.TOKEN).build();
-		jda.getPresence().setStatus(OnlineStatus.IDLE);
-		jda.getPresence().setActivity(Activity.watching("One Punch Man"));
-		jda.addEventListener(new CommandManager());
-		jda.addEventListener(new GuildMemberJoin());
-		jda.addEventListener(new GuildMemberLeave());
-		jda.addEventListener(new AddRole());
+	public static void main(String[] args) throws GeneralSecurityException, IOException {
+		
+		//Set bot token
+		token = args[0];
+		
+		JDABuilder.createDefault(token)
+				.enableIntents(GatewayIntent.GUILD_MEMBERS)
+				.setMemberCachePolicy(MemberCachePolicy.ALL)
+				.addEventListeners(new CommandManager())
+				.setStatus(OnlineStatus.IDLE)
+				.setActivity(Activity.watching("One Punch Man"))
+				.build();
+		
+		service = SheetsUtil.getService();
 	}
 }

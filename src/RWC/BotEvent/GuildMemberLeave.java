@@ -12,6 +12,7 @@ public class GuildMemberLeave extends ListenerAdapter{
 			"No.[member] don't leave us💔"
 		};
 	
+	@Override
 	public void onGuildMemberJoin(GuildMemberJoinEvent event) {
 		Random rand =new Random();
 		int number=rand.nextInt(messages.length);
@@ -19,7 +20,7 @@ public class GuildMemberLeave extends ListenerAdapter{
 		leave.setColor(0x3003fc);
 		leave.setDescription(messages[number].replace("[member]", event.getMember().getAsMention()));
 		
-		event.getGuild().getDefaultChannel().sendMessage(leave.build()).queue();
+		event.getGuild().getDefaultChannel().sendMessageEmbeds(leave.build()).queue();
 		//Add role
 		event.getGuild().modifyMemberRoles(event.getMember(), event.getGuild().getRolesByName("Member", true)).complete();
 	}

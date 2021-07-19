@@ -1,6 +1,6 @@
 package RWC.BotCommand;
 
-import RWC.Bot.Config;
+import RWC.Bot.Bot;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 public class Meet extends Command {
 	
+	@Override
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event, String[] args) {
 		EmbedBuilder meet = new EmbedBuilder();
 		meet.setTitle("📅 Meeting Schedule");
@@ -16,8 +17,7 @@ public class Meet extends Command {
 		meet.setColor(0x3452eb);
 		meet.setFooter("Here you go!",event.getMember().getUser().getAvatarUrl());
 		
-		//event.getChannel().sendTyping().queue();
-		event.getChannel().sendMessage(meet.build()).queue();
+		event.getChannel().sendMessageEmbeds(meet.build()).queue();
 		meet.clear();
 	}
 
@@ -38,7 +38,7 @@ public class Meet extends Command {
 
 	@Override
 	public String getExample() {
-		return getDescription() + "\nExample: " + Config.prefix + "" + getName();
+		return getDescription() + "\nExample: " + Bot.PREFIX + "" + getName();
 	}
 
 
