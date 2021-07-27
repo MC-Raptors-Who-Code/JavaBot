@@ -1,3 +1,6 @@
 /target/
 src/resources/credentials.json
 tokens/StoredCredential
+.settings/
+.project
+.classpath
