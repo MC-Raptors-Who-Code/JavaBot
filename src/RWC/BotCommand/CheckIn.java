@@ -28,8 +28,8 @@ public class CheckIn extends Command {
 		ValueRange response = null;
 		try {
 			response = Bot.service.spreadsheets().values().get(spreadsheetId, RANGE).execute();
-		} catch (IOException e) {
-			System.out.println("Unable to get values from spreadsheet");
+		} catch (IOException | NullPointerException e) {
+			System.out.println("Unable to get values from spreadsheet.");
 			return;
 		}
         List<List<Object>> values = response.getValues();

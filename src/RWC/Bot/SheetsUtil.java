@@ -45,14 +45,15 @@ public final class SheetsUtil {
     
 	/**
 	* Creates and returns an authorized Credential object
-	* @throws IOException If credentials file cannot be found
+	* @throws IOException If the application cannot be authorized
 	* @throws GeneralSecurityException If access token cannot be obtained
+	* @throws FileNotFoundException If credentials.json cannot be found
 	*/
-    public static Credential getCredentials() throws IOException, GeneralSecurityException{
+    public static Credential getCredentials() throws IOException, GeneralSecurityException, FileNotFoundException {
     	//Load client secrets from credentials file
         InputStream in = SheetsUtil.class.getResourceAsStream("/resources/credentials.json");
         if (in == null) {
-            throw new FileNotFoundException("Credentials file not found");
+            throw new FileNotFoundException();
         }
         GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JacksonFactory.getDefaultInstance(), new InputStreamReader(in));
         
